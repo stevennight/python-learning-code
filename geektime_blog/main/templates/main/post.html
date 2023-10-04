@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+
+{% load bootstrap5 %}
+
+{% block page_header %}
+{% endblock page_header %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">{{ post }}</div>
+    <div class="card-body">{{ post.content }}</div>
+    <div class="card-footer">
+        {{ post.creator }} | {{ post.created_at|date:'Y-m-d H:i:s' }}
+        <a class="btn btn-primary btn-sm" href="{% url 'main:edit_post' post.id %}">Edit</a>
+        <a class="btn btn-danger btn-sm" href="{% url 'main:delete_post' post.id %}">Delete</a>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">Comments</div>
+    <div class="card-body">
+        {% for comment in comments %}
+        <div class="card mb-2">
+            <div class="card-header">
+                {{ comment.creator }}: {{ comment }}
+                <a href="{% url 'main:delete_comment' comment.id %}">Delete</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="card">
+            <div class="card-header">
+                No comment yet.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="card-footer">
+        <form method="post" action="{% url 'main:add_comment' post.id %}">
+            {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            <button type="submit" class="btn btn-primary btn-sm">Add Comment</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

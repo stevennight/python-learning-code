@@ -1,0 +1,38 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+<style>
+  .post_block {
+    margin-bottom: 10px;
+  }
+</style>
+<div>
+  <div>
+    <h2>Posts</h2>
+  </div>
+  <div class="control_panel">
+    <a href="{% url 'blogs:add_post' %}">Add Post</a>
+  </div>
+  <div class="content">
+    {% for blog_post in blog_posts %}
+      <a>
+        <div class="post_block">
+          <div class="title_block">
+            {{ blog_post }}
+          </div>
+          <div class="date_added_block">
+            date_added: {{ blog_post.date_added|date:"Y-m-d H:i:s" }}
+          </div>
+          <div>
+            <a href="{% url 'blogs:edit_post' blog_post.id %}">Edit</a>
+          </div>
+        </div>
+      </a>
+    {% empty %}
+      <div class="empty">
+        No Post Yet.
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

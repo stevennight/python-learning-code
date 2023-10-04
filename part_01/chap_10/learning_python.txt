@@ -1,0 +1,3 @@
+In Python you can random a number.
+In Python you can do some thing repeat.
+In Python you can ...

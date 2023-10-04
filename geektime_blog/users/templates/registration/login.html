@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block page_header %}
+{% endblock page_header %}
+
+{% block content %}
+
+{% load bootstrap5 %}
+<form method="post" action="{% url 'users:login' %}" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" class="btn btn-primary" value="Login">
+    <input type="hidden" name="next" value="{% url 'main:index' %}">
+</form>
+
+{% endblock content %}

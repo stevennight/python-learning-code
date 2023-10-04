@@ -1,0 +1,5 @@
+.idea
+venv
+ll_env
+*.sqlite3
+blog_env

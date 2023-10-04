@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block page_header %}
+{% endblock page_header %}
+
+{% block content %}
+<style>
+    .card {
+        cursor: pointer;
+    }
+</style>
+
+<p>
+    <a type="button" class="btn btn-success" href="{% url 'main:add_post' %}">Create Posts</a>
+</p>
+
+{% for post in posts %}
+<div class="card mb-2" onclick="toPost({{ post.id }})">
+    <div class="card-header">{{ post }}</div>
+    <div class="card-body">{{ post.content }}</div>
+    <div class="card-footer">
+        {{ post.creator }} | {{ post.created_at|date:'Y-m-d H:i:s' }}
+        <a class="btn btn-primary btn-sm" href="{% url 'main:edit_post' post.id %}">Edit</a>
+        <a class="btn btn-danger btn-sm" href="{% url 'main:delete_post' post.id %}">Delete</a>
+    </div>
+</div>
+{% empty %}
+<div class="card mb-2">
+    <div class="card-header">No Post Yet!@!</div>
+</div>
+{% endfor %}
+
+
+<script type="text/javascript">
+    function toPost(id) {
+        location.href = '/post/' + id
+    }
+</script>
+{% endblock content %}

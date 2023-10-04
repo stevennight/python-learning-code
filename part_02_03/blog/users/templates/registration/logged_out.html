@@ -1,0 +1,12 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+
+Log out success!
+
+<script>
+    setTimeout(function() {
+        location.href = "{% url 'blogs:index' %}"
+    }, 3000)
+</script>
+{% endblock content %}

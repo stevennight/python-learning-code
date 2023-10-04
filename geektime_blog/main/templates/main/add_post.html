@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block page_header %}
+{% endblock page_header %}
+
+{% block content %}
+
+{% load bootstrap5 %}
+
+<div class="container">
+  <form method="post" action="{% url 'main:add_post' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" name="submit" class="btn btn-primary">publish</button>
+  </form>
+</div>
+
+{% endblock content %}
